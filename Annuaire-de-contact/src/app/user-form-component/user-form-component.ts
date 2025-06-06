@@ -15,7 +15,8 @@ export class UserFormComponent {
     photo : null as File | null,
     age : null as number | null,
     telephone : '',
-    adresse : '',
+    adressePostal : '',
+    codePostal : '',
     metier : '',
     description : ''
   };
