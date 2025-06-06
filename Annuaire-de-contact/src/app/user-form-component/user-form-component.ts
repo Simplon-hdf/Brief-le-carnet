@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './user-form-component.css'
 })
 export class UserFormComponent {
-  DonneForm = {
+  donneForm = {
     nom : '',
     prenom : '',
     photo : null,
@@ -18,4 +18,11 @@ export class UserFormComponent {
     metier : '',
     description : ''
   };
+
+  pictures(event:any) {
+    const image = event.target.file[0];
+    if (image) {
+      this.donneForm.photo = image;
+    }
+  }
 }
