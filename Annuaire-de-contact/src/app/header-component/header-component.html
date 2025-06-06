@@ -1,0 +1,13 @@
+<header>
+    <a>
+        <img [src]="logo" alt="logo Le Carnet" class="h-70  w-auto">
+    </a>
+    <nav>
+        <a routerLink="/" routerLinkActive="active">Acceuil</a>
+        <a routerLink="/Annuaire" routerLinkActive="active">Annuaire</a>
+        <a routerLink="/Ajout contact"  routerLinkActive="active">Ajout contact</a>
+    </nav>
+    <button (click)="switchAdmin()">
+        Admin : {{ isAdmin ? 'ON' : 'OFF' }}
+    </button>
+</header>
