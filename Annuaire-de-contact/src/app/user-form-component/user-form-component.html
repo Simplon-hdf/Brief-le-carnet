@@ -50,4 +50,13 @@
             <div *ngIf="tel.errors?.['maxlenght']">Le numéro doit faire que 10 chiffres maximum.</div>
         </div>
     </div>
+    <div>
+        <label>Adresse postale : </label>
+        <input type="text" [(ngModel)]="donneForm.adressePostal" name="adressePostal" required pattern="^^(\d{1,5})(?:\s+(bis|ter|quater))?\s+([A-Za-zÀ-ÿ'’-. ]+)$" #adressePostale="ngModel" />
+
+        <div>
+            <div *ngIf="adressePostale.errors?.['required']">Une adresse postale est requise.</div>
+            <div *ngIf="adressePostale.errors?.['pattern']">Veuillez saisir une adresse postale complète (ex. : 15 rue Victor Hugo)</div>
+        </div>
+    </div>
 </form>
