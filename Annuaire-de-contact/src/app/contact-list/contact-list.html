@@ -1,5 +1,12 @@
-<div *ngFor="let contact of filteredContacts" class="contact-card">
-  <strong>{{ contact.name }}</strong><br>
-  <span>{{ contact.email }}</span><br>
-  <small>{{ contact.num }}</small>
+<app-search-bar (search)="filterContacts($event)"></app-search-bar>
+<div *ngIf="searchTerm && filteredContacts.length > 0">
+  <div *ngFor="let contact of filteredContacts" class="contact-card">
+    <strong>{{ contact.name }}</strong><br>
+    <span>{{ contact.email }}</span><br>
+    <small>{{ contact.num }}</small>
+  </div>
+</div>
+
+<div *ngIf="searchTerm && filteredContacts.length === 0">
+  Pas de correspondance.
 </div>
