@@ -12,13 +12,15 @@ export class UserFormComponent {
   donneForm = {
     nom : '',
     prenom : '',
-    photo : null,
-    age : null,
+    photo : null as File | null,
+    age : null as number | null,
     telephone : '',
     adresse : '',
     metier : '',
     description : ''
   };
+
+  photoPrevieuw: string | ArrayBuffer | null = null
 
   pictures(event:any) {
     const image = event.target.files[0];
