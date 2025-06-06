@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { SearchBar } from "../search-bar/search-bar";
 
 @Component({
   selector: 'app-contact-list',
-  imports: [CommonModule],
+  imports: [CommonModule, SearchBar],
   templateUrl: './contact-list.html',
   styleUrl: './contact-list.css'
 })
@@ -16,4 +17,13 @@ export class ContactList {
     { name: 'Xavier', email: 'xavier@foudelagare.com', num: '06 65 45 12 36' },
   ];
   filteredContacts = [...this.contacts];
+  searchTerm: string = '';
+  filterContacts(term: string) {
+    this.searchTerm = term;
+  const normalizedTerm = term.toLowerCase().trim();
+  this.filteredContacts = this.contacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedTerm) || contact.email.toLowerCase().includes(normalizedTerm) || contact.num.includes(normalizedTerm)
+  );
 }
+}
+
