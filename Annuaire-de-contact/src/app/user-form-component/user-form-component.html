@@ -14,7 +14,19 @@
         <label>Prénom : </label>
         <input type="text" [(ngModel)]="donneForm.prenom" name="prenom" required pattern="[a-zA-ZÀ-ÿ\s'-]+" #prenom="ngModel"/>
 
-        <div *ngIf="prenom.errors?.['required']">Le prénom est requis.</div>
-        <div *ngIf="prenom.errors?.['pattern']">Le prénom doit contenir uniquement des lettres</div>
+        <div *ngIf="prenom.invalid && prenom.touched">
+            <div *ngIf="prenom.errors?.['required']">Le prénom est requis.</div>
+            <div *ngIf="prenom.errors?.['pattern']">Le prénom doit contenir uniquement des lettres</div>
+        </div>
+    </div>
+    <div>
+        <label>Photo de profil : </label>
+        <input type="file" (change)="pictures($event)" accept="image/*" name="photo" required #photoInput/>
+
+        <figure *ngIf="photoPrevieuw">
+            <img [src]="photoPrevieuw" alt="Apercu photo">
+        </figure>
+
+        <div *ngIf="!photoInput.value && formRef.submitted">Une photo de profil est requis.</div>
     </div>
 </form>
