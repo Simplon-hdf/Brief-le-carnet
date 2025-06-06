@@ -3,7 +3,7 @@
 
     <div>
         <label>Nom : </label>
-        <input type="text" [(ngModel)]="donneForm.nom" name="nom" required pattern="[a-zA-ZÀ-ÿ\s'-]+" #nom="ngModel"/>
+        <input type="text" [(ngModel)]="donneForm.nom" name="nom" required pattern="[a-zA-ZÀ-ÿ\s'-]+" #nom="ngModel" placeholder="Ex : dupont"/>
 
         <div *ngIf="nom.invalid && nom.touched">
             <div *ngIf="nom.errors?.['required']">Le nom est requis.</div>
