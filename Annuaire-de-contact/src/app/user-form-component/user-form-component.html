@@ -1,1 +1,13 @@
 <h2>Ajout de contact</h2>
+<form (ngSubmit)="envoie()" #formRef="ngForm">
+
+    <div>
+        <label>Nom : </label>
+        <input type="text" [(ngModel)]="donneForm.nom" name="nom" required pattern="[a-zA-ZÀ-ÿ\s'-]+" #nom="ngModel"/>
+
+        <div *ngIf="nom.invalid && nom.touched">
+            <div *ngIf="nom.errors?.['required']">Le nom est requis.</div>
+            <div *ngIf="nom.errors?.['pattern']">Le nom doit contenir uniquement des lettres.</div>
+        </div>
+    </div>
+</form>
