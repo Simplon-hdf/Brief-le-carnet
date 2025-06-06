@@ -41,13 +41,13 @@
     </div>
     <div>
         <label>Numéro de téléphone : </label>
-        <input type="tel" [(ngModel)]="donneForm.telephone" name="telephone" required pattern="[0-9]{10}" maxlength="10" #tel="ngModel"/>
+        <input type="tel" [(ngModel)]="donneForm.telephone" name="telephone" required pattern="^(\d{10})$" maxlength="10" #tel="ngModel"/>
         <small>Format: 10 chiffres (ex: 0123456789)</small>
 
         <div *ngIf="tel.invalid && tel.touched">
             <div *ngIf="tel.errors?.['required']">Un numéro de téléphone valide est requis.</div>
             <div *ngIf="tel.errors?.['pattern']">Le numéro de téléphone ne doit contenir que des chiffres.</div>
-            <div *ngIf="tel.errors?.['maxlenght']">Le numéro doit faire que 10 chiffres maximum.</div>
+            <div *ngIf="tel.errors?.['maxlenght']">Le numéro de téléphone ne doit faire que 10 chiffres maximum.</div>
         </div>
     </div>
     <div>
@@ -57,6 +57,15 @@
         <div>
             <div *ngIf="adressePostale.errors?.['required']">Une adresse postale est requise.</div>
             <div *ngIf="adressePostale.errors?.['pattern']">Veuillez saisir une adresse postale complète (ex. : 15 rue Victor Hugo)</div>
+        </div>
+    </div>
+    <div>
+        <label>Code postale : </label>
+        <input type="number" [(ngModel)]="donneForm.codePostal" name="codePostal" required pattern="^(\d{5})$" #codePostale="ngModel" />
+
+        <div>
+            <div *ngIf="codePostale.errors?.['required']">Un code postale est requis.</div>
+            <div *ngIf="codePostale.errors?.['pattern']">Veuillez saisir un code postal à 5 chiffres (ex. : 75001)</div>
         </div>
     </div>
 </form>
