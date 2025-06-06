@@ -77,4 +77,14 @@
             <div *ngIf="metier.errors?.['pattern']">Veuillez saisir un intitulé de métier valide (ex. : Développeur web, Infirmier, Boulanger).</div>
         </div>
     </div>
+    <div>
+        <label>Une petite description : </label>
+        <textarea [(ngModel)]="donneForm.description" name="description" required pattern="^(?:\S+(?:\s+\S+){0,299})?$" minlength="" #description="ngModel"></textarea>
+        <small>300 mots max (~2000 caractères)</small>
+
+        <div >
+            <div *ngIf="description.errors?.['required']">Veuillez renseigner une description.</div>
+            <div *ngIf="description.errors?.['pattern']">Votre description est trop longue (maximum 300 mots autorisés).</div>
+        </div>
+    </div>
 </form>
