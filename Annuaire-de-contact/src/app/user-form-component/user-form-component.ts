@@ -25,4 +25,8 @@ export class UserFormComponent {
       this.donneForm.photo = image;
     }
   }
+
+  envoie(){
+    console.log('Formulaire soumis :', this.donneForm);
+  }
 }
