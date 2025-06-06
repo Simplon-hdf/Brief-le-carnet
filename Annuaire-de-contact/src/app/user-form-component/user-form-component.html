@@ -10,4 +10,11 @@
             <div *ngIf="nom.errors?.['pattern']">Le nom doit contenir uniquement des lettres.</div>
         </div>
     </div>
+    <div>
+        <label>Prénom : </label>
+        <input type="text" [(ngModel)]="donneForm.prenom" name="prenom" required pattern="[a-zA-ZÀ-ÿ\s'-]+" #prenom="ngModel"/>
+
+        <div *ngIf="prenom.errors?.['required']">Le prénom est requis.</div>
+        <div *ngIf="prenom.errors?.['pattern']">Le prénom doit contenir uniquement des lettres</div>
+    </div>
 </form>
