@@ -21,7 +21,7 @@
     </div>
     <div>
         <label>Photo de profil : </label>
-        <input type="file" (change)="pictures($event)" accept="image/*" name="photo" required #photoInput/>
+        <input type="file" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput/>
 
         <figure *ngIf="photoPrevieuw">
             <img [src]="photoPrevieuw" alt="Apercu photo">
@@ -31,12 +31,23 @@
     </div>
     <div>
         <label>L'âge : </label>
-        <input type="number" [(ngModel)]="donneForm" name="age" required min="18" max="120" #age="ngModel"/>
+        <input type="number" [(ngModel)]="donneForm.age" name="age" required min="18" max="120" #age="ngModel"/>
 
         <div *ngIf="age.invalid && age.touched">
-            <div>L'âge est requis.</div>
-            <div>L'âge doit être au moins de 18ans.</div>
-            <div>L'âge doit être inférieur à 120 ans.</div>
+            <div *ngIf="age.errors?.['required']">L'âge est requis.</div>
+            <div *ngIf="age.errors?.['min']">L'âge doit être au moins de 18ans.</div>
+            <div *ngIf="age.errors?.['max']">L'âge doit être inférieur à 120 ans.</div>
+        </div>
+    </div>
+    <div>
+        <label>Numéro de téléphone : </label>
+        <input type="tel" [(ngModel)]="donneForm.telephone" name="telephone" required pattern="[0-9]{10}" maxlength="10" #tel="ngModel"/>
+        <small>Format: 10 chiffres (ex: 0123456789)</small>
+
+        <div *ngIf="tel.invalid && tel.touched">
+            <div *ngIf="tel.errors?.['required']">Un numéro de téléphone valide est requis.</div>
+            <div *ngIf="tel.errors?.['pattern']">Le numéro de téléphone ne doit contenir que des chiffres.</div>
+            <div *ngIf="tel.errors?.['maxlenght']">Le numéro doit faire que 10 chiffres maximum.</div>
         </div>
     </div>
 </form>
