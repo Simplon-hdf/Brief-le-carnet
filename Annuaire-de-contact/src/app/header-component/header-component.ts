@@ -10,4 +10,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
   logo = '../../assets/logo.svg';
 
+  isAdmin: boolean = false;
+
+  switchAdmin() {
+  this.isAdmin = !this.isAdmin;
+}
 }
