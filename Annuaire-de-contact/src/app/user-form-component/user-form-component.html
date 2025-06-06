@@ -29,4 +29,14 @@
 
         <div *ngIf="!photoInput.value && formRef.submitted">Une photo de profil est requis.</div>
     </div>
+    <div>
+        <label>L'âge : </label>
+        <input type="number" [(ngModel)]="donneForm" name="age" required min="18" max="120" #age="ngModel"/>
+
+        <div *ngIf="age.invalid && age.touched">
+            <div>L'âge est requis.</div>
+            <div>L'âge doit être au moins de 18ans.</div>
+            <div>L'âge doit être inférieur à 120 ans.</div>
+        </div>
+    </div>
 </form>
