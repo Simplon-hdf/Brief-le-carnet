@@ -8,5 +8,14 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './user-form-component.css'
 })
 export class UserFormComponent {
-
+  DonneForm = {
+    nom : '',
+    prenom : '',
+    photo : null,
+    age : null,
+    telephone : '',
+    adresse : '',
+    metier : '',
+    description : ''
+  };
 }
