@@ -30,23 +30,25 @@
             <!-- PHOTO -->
 
     <div>
-        <label>Photo de profil : </label>
-        <input type="file" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput/>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Photo de profil : </label>
+        <input type="file" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
+        class="w-full border rounded-lg px-4 py-2 text-gray-500"/>
 
         <figure *ngIf="photoPrevieuw">
             <img [src]="photoPrevieuw" alt="Apercu photo">
         </figure>
 
-        <div *ngIf="!photoInput.value && formRef.submitted">Une photo de profil est requis.</div>
+        <div *ngIf="!photoInput.value && formRef.submitted" class="text-red-600 text-sm mt-1">Une photo de profil est requis.</div>
     </div>
 
             <!-- ÂGE -->
 
     <div>
-        <label>L'âge : </label>
-        <input type="number" [(ngModel)]="donneForm.age" name="age" required min="18" max="120" #age="ngModel"/>
+        <label class="block text-sm font-medium text-gray-700 mb-1">L'âge : </label>
+        <input type="number" [(ngModel)]="donneForm.age" name="age" required min="18" max="120" #age="ngModel"
+        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
 
-        <div *ngIf="age.invalid && age.touched">
+        <div class="text-red-600 text-sm mt-1" *ngIf="age.invalid && age.touched">
             <div *ngIf="age.errors?.['required']">L'âge est requis.</div>
             <div *ngIf="age.errors?.['min']">L'âge doit être au moins de 18ans.</div>
             <div *ngIf="age.errors?.['max']">L'âge doit être inférieur à 120 ans.</div>
