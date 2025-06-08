@@ -78,13 +78,9 @@
 
     <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Adresse postale :</label>
-        <input type="text"
-            [(ngModel)]="donneForm.adressePostal"
-            name="adressePostal"
-            required
-            pattern="^(\d{1,5})(?:\s+(bis|ter|quater))?\s+([A-Za-zÀ-ÿ'’-. ]+)$"
-            #adressePostale="ngModel"
+        <input type="text" [(ngModel)]="donneForm.adressePostal" name="adressePostal" required pattern="^(\d{1,5})(?:\s+(bis|ter|quater))?\s+([A-Za-zÀ-ÿ'’-. ]+)$" #adressePostale="ngModel"
             class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+            <small class="text-gray-500 text-sm">Exemple : 15 rue Victor Hugo</small>
 
         <div *ngIf="adressePostale.invalid && adressePostale.touched" class="text-red-600 text-sm mt-1">
         <div *ngIf="adressePostale.errors?.['required']">Une adresse postale est requise.</div>
@@ -98,12 +94,7 @@
 
     <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Code postal :</label>
-        <input type="number"
-            [(ngModel)]="donneForm.codePostal"
-            name="codePostal"
-            required
-            pattern="^(\d{5})$"
-            #codePostale="ngModel"
+        <input type="number" [(ngModel)]="donneForm.codePostal" name="codePostal" required pattern="^(\d{5})$" #codePostale="ngModel"
             class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
 
         <div *ngIf="codePostale.invalid && codePostale.touched" class="text-red-600 text-sm mt-1">
