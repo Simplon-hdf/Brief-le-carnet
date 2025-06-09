@@ -14,5 +14,15 @@ export class HeaderComponent {
 
   switchAdmin() {
   this.isAdmin = !this.isAdmin;
+
+  const body = document.body;
+  body.classList.remove('bg-white', 'bg-slate-900', 'text-gray-900', 'text-white');
+  body.classList.add('transition-colors', 'duration-300');
+  
+  if (this.isAdmin) {
+    body.classList.add('bg-slate-500');
+  } else {
+    body.classList.add('bg-white');
+  }
 }
 }
