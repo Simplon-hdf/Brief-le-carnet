@@ -1,15 +1,16 @@
-<header class="relative flex items-center justify-between px-6 py-4 bg-white h-28 m-8">
-    <a class="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+<header class="relative flex items-center justify-between px-6 py-4 bg-white h-28">
+
+    <a class="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
         <img [src]="logo" alt="logo Le Carnet" class="h-70 w-auto">
     </a>
 
-    <nav class="flex space-x-8 ml-auto">
-        <a routerLink="/" routerLinkActive="active" class="text-gray-700 hover:text-blue-600">Acceuil</a>
+    <nav class="flex space-x-8 ml-auto z-20">
+        <a routerLink="/" routerLinkActive="active" class="text-gray-700 hover:text-blue-600">Accueil</a>
         <a routerLink="/Annuaire" routerLinkActive="active" class="text-gray-700 hover:text-blue-600">Annuaire</a>
         <a routerLink="/Ajout contact"  routerLinkActive="active" class="text-gray-700 hover:text-blue-600">Ajout contact</a>
     </nav>
 
-    <button (click)="switchAdmin()" class="absolute top-2 right-4 text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-1 rounded">
+    <button (click)="switchAdmin()" class="absolute top-2 right-4 text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-1 rounded z-30">
         Admin : {{ isAdmin ? 'ON' : 'OFF' }}
     </button>
 </header>
