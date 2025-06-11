@@ -17,7 +17,7 @@
         <p><strong>Email : </strong>{{ donneForm.email }}</p>
         <p><strong>Téléphone : </strong>{{ donneForm.telephone }}</p>
         <p><strong>Adresse : </strong>{{ donneForm.adressePostal }} ({{ donneForm.codePostal }})</p>
-        <p><strong>Poste : </strong>{{ donneForm.metier }}</p>
+        <p><strong>Poste rechercher : </strong>{{ donneForm.metier }}</p>
         <p><strong>Description entreprise : </strong>{{ donneForm.description }}</p>
     </div>
 
@@ -27,7 +27,9 @@
     </div>
 
     <div class="mt-4">
-        <button (click)="toggleExpanded()" class="text-indigo-800 underline text-sm font-medium">{{ isExpanded ? 'Réduire' : "Plus d'information" }}</button>
+        <button (click)="toggleExpanded()" class="text-indigo-800 underline text-sm font-medium">{{ isExpanded ? 'Réduire' : "Plus d'information" }}
+            <span class="inline-block ml-1">▼</span>
+        </button>
     </div>
     
 </div>
