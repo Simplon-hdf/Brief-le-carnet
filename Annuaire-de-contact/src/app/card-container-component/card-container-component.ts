@@ -40,4 +40,8 @@ export class CardContainerComponent {
       description: 'Lucie a 5 ans d’expérience dans l’administration et la gestion de dossiers.'
     }
   ];
+
+    filtrer(type: 'tous' | 'entreprise' | 'interimaire') {
+    this.filtre = type;
+  }
 }
