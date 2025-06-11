@@ -1,9 +1,29 @@
-<div>
+<app-user-form-component></app-user-form-component>
+
+<div class="rounded-xl shadow-md bg-blue-200 p-4 transition-all duration-300 ease-in-out w-full max-w-md" >
     <div>
-        <img *ngIf="testPng" [src]="testPng" alt="logo de l'entreprise" >
+        <div>
+            <img *ngIf="testPng" [src]="testPng" alt="logo de l'entreprise" >
+        </div>
+        <div>
+            <h3>{{ donneForm.nom }}</h3>
+            <p>Entreprise</p>
+        </div>
     </div>
+
     <div>
-        <h3>Nom : {{ donneForm.nom }}</h3>
-        <p>Entreprise</p>
+        <p><strong>Email : </strong>{{ donneForm.email }}</p>
+        <p><strong>Téléphone : </strong>{{ donneForm.telephone }}</p>
+        <p><strong>Adresse : </strong>{{ donneForm.adressePostal }} ({{ donneForm.codePostal }})</p>
+        <p><strong>Poste : </strong>{{ donneForm.metier }}</p>
+    </div>
+
+    <div>
+        <p>Description : </p>
+        <p>{{ donneForm.description }}</p>
+    </div>
+
+    <div>
+        <button>{{ isExpanded ? 'Réduire' : "Plus d'information" }}</button>
     </div>
 </div>
