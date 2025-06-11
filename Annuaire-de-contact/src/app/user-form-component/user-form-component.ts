@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class UserFormComponent {
   donneForm = {
+    type: 'interimaire',
     nom : '',
     prenom : '',
     photo : null as File | null,
@@ -30,10 +31,11 @@ export class UserFormComponent {
     }
   }
 
-  envoie(){
+  envoie(): void{
     console.log('Formulaire soumis :', this.donneForm);
+    alert('Formulaire soumis avec succès !');
   }
 
-  typeContact: 'entreprise' | 'interimaire' = 'interimaire';
+  typeFormulaire: 'entreprise' | 'interimaire' = 'interimaire';
 
 }
