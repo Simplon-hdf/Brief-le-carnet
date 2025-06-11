@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { UserFormComponent } from "../user-form-component/user-form-component";
 
 @Component({
   selector: 'app-card-entreprise-component',
-  imports: [CommonModule, UserFormComponent],
+  imports: [CommonModule,],
   templateUrl: './card-entreprise-component.html',
   styleUrl: './card-entreprise-component.css'
 })
