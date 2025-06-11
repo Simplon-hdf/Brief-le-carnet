@@ -1,4 +1,6 @@
-<div class="w-[40vw] h-[280px] rounded-xl shadow-md bg-yellow-200 p-4 flex flex-col items-center justify-between text-center overflow-hidden">
+<div class="w-[40vw] min-h-[280px] max-h-[280px] rounded-xl shadow-md bg-yellow-200 p-4 flex flex-col items-center justify-between text-center overflow-hidden transition-all duration-300"
+    [class.max-h-[1000px]]="isExpanded">
+
 
     <div class="flex items-center gap-4 mb-2">
         <div class="w-12 h-12 rounded-full overflow-hidden border">
