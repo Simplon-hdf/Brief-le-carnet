@@ -19,6 +19,7 @@ export class CardEntrepriseComponent {
     adressePostal: '10 rue de Paris',
     codePostal: '75001',
     metier: 'Recrutement développeur',
+    descriptionPoste: 'Développeur Full Stack Nous recherchons un développeur full stack passionné pour rejoindre notre équipe agile. Vous serez responsable de la conception, du développement et de la maintenance de nos applications web. Vous travaillerez en étroite collaboration avec les équipes produit, UX et DevOps pour livrer des solutions performantes, évolutives et sécurisées.',
     description: 'Entreprise innovante dans la tech, spécialisée dans le développement web.'
   };
 

@@ -1,4 +1,4 @@
-<div class="rounded-xl shadow-md bg-blue-200 p-4 transition-all duration-300 ease-in-out w-full max-w-md">
+<div class="w-[40vw] h-[280px] rounded-xl shadow-md bg-blue-200 p-4 flex flex-col items-center justify-between text-center overflow-hidden">
 
     <div class="flex items-center gap-4 mb-2">
         <div class="w-12 h-12 rounded-full overflow-hidden border">
@@ -16,11 +16,12 @@
         <p><strong>Téléphone : </strong>{{ donneForm.telephone }}</p>
         <p><strong>Adresse : </strong>{{ donneForm.adressePostal }} ({{ donneForm.codePostal }})</p>
         <p><strong>Poste : </strong>{{ donneForm.metier }}</p>
+        <p><strong>Description entreprise : </strong>{{ donneForm.description }}</p>
     </div>
 
     <div [hidden]="!isExpanded" class="mt-3 text-sm text-gray-900">
         <p class="font-semibold mb-1">Description du poste : </p>
-        <p>{{ donneForm.description }}</p>
+        <p>{{ donneForm.descriptionPoste }}</p>
     </div>
 
     <div class="mt-4">
