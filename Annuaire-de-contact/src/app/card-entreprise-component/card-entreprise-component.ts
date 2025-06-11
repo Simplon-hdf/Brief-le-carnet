@@ -12,6 +12,7 @@ export class CardEntrepriseComponent {
   isExpanded = false;
 
   donneForm = {
+    type: 'Entreprise',
     nom: 'TechCorp',
     photo: 'assets/pexels-olly-774909.jpg',
     email: 'contact@techcorp.com',

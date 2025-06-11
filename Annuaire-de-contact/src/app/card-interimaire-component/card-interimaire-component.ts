@@ -7,8 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './card-interimaire-component.css'
 })
 export class CardInterimaireComponent {
+
+  isExpanded = false;
+
 donneForm = {
-  type: 'interimaire',
+  type: 'Intérimaire',
   nom: 'Durand',
   prenom: 'Lucie',
   photo: 'assets/pexels-olly-774909.jpg',

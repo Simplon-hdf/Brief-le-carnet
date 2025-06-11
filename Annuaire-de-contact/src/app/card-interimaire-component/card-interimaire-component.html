@@ -1,1 +1,29 @@
+<div>
 
+    <div>
+        <div>
+            <img ngIf="testPng" [src]="testPng" alt="Photo de profil">
+        </div>
+        <div>
+            <h2>{{ donneForm.nom }} {{ donneForm.prenom }}</h2>
+            <p>{{ donneForm.type}}</p>
+        </div>
+    </div>
+
+    <div>
+        <p><strong>Âge : </strong>{{ donneForm.age}}</p>
+        <p><strong>Email : </strong>{{ donneForm.email}}</p>
+        <p><strong>Téléphone : </strong>{{ donneForm.telephone}}</p>
+        <p><strong>Adresse : </strong>{{ donneForm.adressePostal}} {{ donneForm.codePostal}}</p>
+        <p><strong>Métier : </strong>{{ donneForm.metier}}</p>
+    </div>
+
+    <div>
+        <p>Description : </p>
+        <p>{{ donneForm.description}}</p>
+    </div>
+
+    <div>
+        <button>{{ isExpanded ? 'Réduire' : "Plus d'information" }}</button>
+    </div>
+</div>
