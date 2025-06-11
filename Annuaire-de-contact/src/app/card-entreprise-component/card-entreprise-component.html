@@ -20,7 +20,7 @@
         <p><strong>Poste : </strong>{{ donneForm.metier }}</p>
     </div>
 
-    <div ngIf="isExpanded" class="mt-3 text-sm text-gray-900">
+    <div [hidden]="!isExpanded" class="mt-3 text-sm text-gray-900">
         <p class="font-semibold mb-1">Description : </p>
         <p>{{ donneForm.description }}</p>
     </div>
