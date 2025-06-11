@@ -7,16 +7,19 @@ import { Component } from '@angular/core';
   styleUrl: './card-interimaire-component.css'
 })
 export class CardInterimaireComponent {
-    donneForm = {
-    nom: 'TechCorp',
-    photo: 'assets/pexels-olly-774909.jpg',
-    email: 'contact@techcorp.com',
-    telephone: '0123456789',
-    adressePostal: '10 rue de Paris',
-    codePostal: '75001',
-    metier: 'Recrutement développeur',
-    description: 'Entreprise innovante dans la tech, spécialisée dans le développement web.'
-  };
+donneForm = {
+  type: 'interimaire',
+  nom: 'Durand',
+  prenom: 'Lucie',
+  photo: 'assets/pexels-olly-774909.jpg',
+  age: 28,
+  email: 'lucie.durand@email.com',
+  telephone: '0623456789',
+  adressePostal: '45 avenue Jean Jaurès',
+  codePostal: '69003',
+  metier: 'Assistante administrative',
+  description: 'Lucie possède 5 ans d’expérience dans l’administration, la gestion des dossiers et la coordination RH.'
+};
 
   testPng = this.donneForm.photo;
 
