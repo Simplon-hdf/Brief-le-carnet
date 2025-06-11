@@ -33,4 +33,7 @@ export class UserFormComponent {
   envoie(){
     console.log('Formulaire soumis :', this.donneForm);
   }
+
+  typeContact: 'entreprise' | 'interimaire' = 'interimaire';
+
 }
