@@ -1,5 +1,6 @@
 
-<div>
+<div class="flex flex-row gap-4 justify-center mb-6">
+
     <button class="button-tag px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
     (click)="filtrer('tous')">Tous</button>
 
@@ -10,17 +11,17 @@
     (click)="filtrer('interimaire')">Intérimaire</button>
 
 
-    <div>
-        <h2>Entreprise</h2>
-        <div>
+    <div *ngIf="filtre === 'tous' || filtre === 'entreprise'">
+        <h2 class="text-xl font-bold mb-2 text-center">Entreprise</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 justify-items-center">
             <app-card-entreprise-component></app-card-entreprise-component>
         </div>
     </div>
 </div>
 
     <div>
-        <h2>Intérimaire</h2>
-        <div>
+        <h2 class="text-xl font-bold mb-2 text-center">Intérimaire</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 justify-items-center">
             <app-card-interimaire-component></app-card-interimaire-component>
         </div>
     </div>

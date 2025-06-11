@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CardEntrepriseComponent } from "../card-entreprise-component/card-entreprise-component";
+import { CardInterimaireComponent } from "../card-interimaire-component/card-interimaire-component";
 
 @Component({
   selector: 'app-card-container-component',
-  imports: [CommonModule],
+  imports: [CommonModule, CardEntrepriseComponent, CardInterimaireComponent],
   templateUrl: './card-container-component.html',
   styleUrl: './card-container-component.css'
 })
