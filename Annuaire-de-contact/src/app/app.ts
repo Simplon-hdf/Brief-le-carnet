@@ -5,10 +5,11 @@ import { SearchBar } from "./search-bar/search-bar";
 import { ContactList } from "./contact-list/contact-list";
 import { FooterComponent } from './footer-component/footer-component';
 import { UserFormComponent } from "./user-form-component/user-form-component";
+import { HomePage } from './pages/home-page/home-page';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ContactList, HeaderComponent, SearchBar, FooterComponent, UserFormComponent],
+  imports: [RouterOutlet, ContactList, HeaderComponent, SearchBar, FooterComponent, UserFormComponent, HomePage],
 
   templateUrl: './app.html',
   styleUrl: './app.css'

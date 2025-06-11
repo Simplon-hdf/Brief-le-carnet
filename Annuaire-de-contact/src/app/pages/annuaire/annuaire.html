@@ -1,3 +1,27 @@
-<app-header-component></app-header-component>
-<app-user-form-component></app-user-form-component>
-<app-footer-component></app-footer-component>
+<main>
+    <div class="flex p-16 justify-center flex-col gap-16">
+        <div class="flex flex-row gap-4 justify-center">
+            <button class="button-tag px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                Tous
+            </button>
+            <button class="button-tag px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                Entreprise
+            </button>
+            <button class="button-tag px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                Interimaire
+            </button>
+        </div>
+        <div class="flex justify-center p-6">
+            <div class="bg-green-600 flex flex-row">
+                <figure>
+                    <img src="" alt="" class="bg-black h-54 w-54">
+                </figure>
+                <div class="p-6">
+                    <h4>Name</h4>
+                    <h3>métier</h3>
+                    <p>{{ description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
