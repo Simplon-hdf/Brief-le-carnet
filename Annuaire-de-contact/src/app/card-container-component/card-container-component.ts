@@ -24,4 +24,20 @@ export class CardContainerComponent {
       description: 'Entreprise innovante dans la tech, spécialisée dans le développement web.'
     }
   ];
+
+  interims = [
+    {
+      nom: 'Durand',
+      prenom: 'Lucie',
+      type: 'interimaire',
+      photo: 'assets/pexels-olly-774909.jpg',
+      age: 28,
+      email: 'lucie.durand@email.com',
+      telephone: '0623456789',
+      adressePostal: '45 avenue Jean Jaurès',
+      codePostal: '69003',
+      metier: 'Assistante administrative',
+      description: 'Lucie a 5 ans d’expérience dans l’administration et la gestion de dossiers.'
+    }
+  ];
 }
