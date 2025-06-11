@@ -20,9 +20,14 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
-                "glob": "*/",
+                "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/sql.js/dist/",
+                "output": "assets/sql-js/"
               }
             ],
             "styles": [
