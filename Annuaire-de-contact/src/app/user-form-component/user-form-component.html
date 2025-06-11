@@ -38,7 +38,7 @@
 
             <!--NOM DE L ENTREPRISE-->
 
-    <div>
+    <div *ngIf="donneForm.type === 'entreprise'">
         <label class="block text-sm font-medium text-gray-700 mb-1">Nom de l'entreprise : </label>
         <input type="text" [(ngModel)]="donneForm.nom" name="nom" required pattern="[a-zA-ZÀ-ÿ\s'-]+" #nom="ngModel"
         class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
@@ -49,71 +49,74 @@
         </div>
     </div>
 
-            <!-- PHOTO -->
+                <!-- PHOTO -->
 
-    <div *ngIf="donneForm.type === 'interimaire'">
-        <label class="block text-sm font-medium text-gray-700 mb-1">Photo de profil : </label>
-        <input type="file" id="picturesUpload" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
-        class="hidden w-full border rounded-lg px-4 py-2 text-gray-500"/>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div *ngIf="donneForm.type === 'interimaire'">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Photo de profil : </label>
+            <input type="file" id="picturesUpload" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
+            class="hidden w-full border rounded-lg px-4 py-2 text-gray-500"/>
 
-        <label for="picturesUpload" class="inline-block cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">Choisir un fichier</label>
+            <label for="picturesUpload" class="inline-block cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">Choisir un fichier</label>
 
-        <p class="text-sm mt-2 text-gray-600" *ngIf="photoInput && photoInput.files?.length">Fichier sélectionné : {{ photoInput?.files?.[0]?.name }}</p>
+            <p class="text-sm mt-2 text-gray-600" *ngIf="photoInput && photoInput.files?.length">Fichier sélectionné : {{ photoInput?.files?.[0]?.name }}</p>
 
-        <figure *ngIf="photoPrevieuw">
-            <img [src]="photoPrevieuw" alt="Apercu photo">
-        </figure>
+            <figure *ngIf="photoPrevieuw">
+                <img [src]="photoPrevieuw" alt="Apercu photo">
+            </figure>
 
-        <div *ngIf="!photoInput.value && formRef.submitted" class="text-red-600 text-sm mt-1">Une photo de profil est requise.</div>
-    </div>
+            <div *ngIf="!photoInput.value && formRef.submitted" class="text-red-600 text-sm mt-1">Une photo de profil est requise.</div>
+        </div>
 
-            <!-- LOGO ENTREPRISE  -->
+                <!-- LOGO ENTREPRISE  -->
 
-    <div *ngIf="donneForm.type === 'entreprise'">
-        <label class="block text-sm font-medium text-gray-700 mb-1">Logo de l'entreprise : </label>
-        <input type="file" id="LogoUpload" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
-        class="hidden w-full border rounded-lg px-4 py-2 text-gray-500"/>
-        
-        <label for="picturesUpload" class="inline-block cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">Choisir un fichier</label>
+        <div *ngIf="donneForm.type === 'entreprise'">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Logo de l'entreprise : </label>
+            <input type="file" id="logoUpload" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
+            class="hidden w-full border rounded-lg px-4 py-2 text-gray-500"/>
+            
+            <label for="logoUpload" class="inline-block cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">Choisir un fichier</label>
 
-        <p class="text-sm mt-2 text-gray-600" *ngIf="photoInput && photoInput.files?.length">Fichier sélectionné : {{ photoInput?.files?.[0]?.name }}</p>
+            <p class="text-sm mt-2 text-gray-600" *ngIf="photoInput && photoInput.files?.length">Fichier sélectionné : {{ photoInput?.files?.[0]?.name }}</p>
 
-        <figure *ngIf="photoPrevieuw">
-            <img [src]="photoPrevieuw" alt="Apercu logo" />
-        </figure>
-        <div *ngIf="!photoInput.value && formRef.submitted" class="text-red-600 text-sm">Un logo est requis.</div>
-    </div>
+            <figure *ngIf="photoPrevieuw">
+                <img [src]="photoPrevieuw" alt="Apercu logo" />
+            </figure>
+            <div *ngIf="!photoInput.value && formRef.submitted" class="text-red-600 text-sm">Un logo est requis.</div>
+        </div>
 
-            <!-- ÂGE -->
+                <!-- ÂGE -->
 
-    <div *ngIf="donneForm.type === 'interimaire'">
-        <label class="block text-sm font-medium text-gray-700 mb-1">Âge : </label>
-        <input type="number" [(ngModel)]="donneForm.age" name="age" required min="18" max="120" #age="ngModel"
-        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+        <div *ngIf="donneForm.type === 'interimaire'">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Âge : </label>
+            <input type="number" [(ngModel)]="donneForm.age" name="age" required min="18" max="120" #age="ngModel"
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
 
-        <div class="text-red-600 text-sm mt-1" *ngIf="age.invalid && age.touched">
-            <div *ngIf="age.errors?.['required']">L'âge est requis.</div>
-            <div *ngIf="age.errors?.['min']">L'âge doit être au moins de 18ans.</div>
-            <div *ngIf="age.errors?.['max']">L'âge doit être inférieur à 120 ans.</div>
+            <div class="text-red-600 text-sm mt-1" *ngIf="age.invalid && age.touched">
+                <div *ngIf="age.errors?.['required']">L'âge est requis.</div>
+                <div *ngIf="age.errors?.['min']">L'âge doit être au moins de 18ans.</div>
+                <div *ngIf="age.errors?.['max']">L'âge doit être inférieur à 120 ans.</div>
+            </div>
         </div>
     </div>
 
-            <!-- TÉLÉPHONE -->
+                <!-- TÉLÉPHONE -->
 
-    <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Numéro de téléphone : </label>
-        <input type="tel" [(ngModel)]="donneForm.telephone" name="telephone" required pattern="^(\d{10})$" maxlength="10" #tel="ngModel"
-        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
-        <small class="text-gray-500">Format: 10 chiffres (ex: 0123456789)</small>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Numéro de téléphone : </label>
+            <input type="tel" [(ngModel)]="donneForm.telephone" name="telephone" required pattern="^(\d{10})$" maxlength="10" #tel="ngModel"
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+            <small class="text-gray-500">Format: 10 chiffres (ex: 0123456789)</small>
 
-        <div class="text-red-600 text-sm mt-1" *ngIf="tel.invalid && tel.touched">
-            <div *ngIf="tel.errors?.['required']">Un numéro de téléphone valide est requis.</div>
-            <div *ngIf="tel.errors?.['pattern']">Le numéro de téléphone ne doit contenir que des chiffres.</div>
-            <div *ngIf="tel.errors?.['maxlenght']">Le numéro de téléphone ne doit faire que 10 chiffres maximum.</div>
+            <div class="text-red-600 text-sm mt-1" *ngIf="tel.invalid && tel.touched">
+                <div *ngIf="tel.errors?.['required']">Un numéro de téléphone valide est requis.</div>
+                <div *ngIf="tel.errors?.['pattern']">Le numéro de téléphone ne doit contenir que des chiffres.</div>
+                <div *ngIf="tel.errors?.['maxlenght']">Le numéro de téléphone ne doit faire que 10 chiffres maximum.</div>
+            </div>
         </div>
-    </div>
 
     <!-- EMAIL -->
+
     <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Email : </label>
         <input type="email" [(ngModel)]="donneForm.email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #email="ngModel"
