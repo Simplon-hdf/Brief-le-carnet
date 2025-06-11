@@ -2,10 +2,10 @@
 <form (ngSubmit)="envoie()" #formRef="ngForm" class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-5">
 
     <div class="flex space-x-4 justify-center mb-4">
-        <label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
             <input type="radio" name="type" [(ngModel)]="donneForm.type" [value]="'interimaire'" class="mr-1">Intérimaire
         </label>
-        <label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
             <input type="radio" name="type" [(ngModel)]="donneForm.type" [value]="'entreprise'" class="mr-1">Entreprise
         </label>
     </div>
@@ -39,7 +39,7 @@
             <!--NOM DE L ENTREPRISE-->
 
     <div>
-        <label>Nom de l'entreprise : </label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nom de l'entreprise : </label>
         <input type="text" [(ngModel)]="donneForm.nom" name="nom" required pattern="[a-zA-ZÀ-ÿ\s'-]+" #nom="ngModel"
         class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
 
@@ -49,12 +49,16 @@
         </div>
     </div>
 
-            <!-- PHOTO OU LOGO ENTREPRISE-->
+            <!-- PHOTO -->
 
     <div *ngIf="donneForm.type === 'interimaire'">
         <label class="block text-sm font-medium text-gray-700 mb-1">Photo de profil : </label>
-        <input type="file" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
-        class="w-full border rounded-lg px-4 py-2 text-gray-500"/>
+        <input type="file" id="picturesUpload" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
+        class="hidden w-full border rounded-lg px-4 py-2 text-gray-500"/>
+
+        <label for="picturesUpload" class="inline-block cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">Choisir un fichier</label>
+
+        <p class="text-sm mt-2 text-gray-600" *ngIf="photoInput && photoInput.files?.length">Fichier sélectionné : {{ photoInput?.files?.[0]?.name }}</p>
 
         <figure *ngIf="photoPrevieuw">
             <img [src]="photoPrevieuw" alt="Apercu photo">
@@ -63,10 +67,16 @@
         <div *ngIf="!photoInput.value && formRef.submitted" class="text-red-600 text-sm mt-1">Une photo de profil est requise.</div>
     </div>
 
+            <!-- LOGO ENTREPRISE  -->
+
     <div *ngIf="donneForm.type === 'entreprise'">
-        <label>Logo de l'entreprise :</label>
-        <input type="file" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
-        class="w-full border rounded-lg px-4 py-2 text-gray-500"/>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Logo de l'entreprise : </label>
+        <input type="file" id="LogoUpload" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
+        class="hidden w-full border rounded-lg px-4 py-2 text-gray-500"/>
+        
+        <label for="picturesUpload" class="inline-block cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">Choisir un fichier</label>
+
+        <p class="text-sm mt-2 text-gray-600" *ngIf="photoInput && photoInput.files?.length">Fichier sélectionné : {{ photoInput?.files?.[0]?.name }}</p>
 
         <figure *ngIf="photoPrevieuw">
             <img [src]="photoPrevieuw" alt="Apercu logo" />
@@ -105,7 +115,7 @@
 
     <!-- EMAIL -->
     <div>
-        <label>Email : </label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Email : </label>
         <input type="email" [(ngModel)]="donneForm.email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #email="ngModel"
         class="w-full border rounded-lg px-4 py-2" />
 
