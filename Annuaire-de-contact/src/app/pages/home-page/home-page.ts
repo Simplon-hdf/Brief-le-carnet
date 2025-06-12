@@ -3,13 +3,15 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SqliteService, User } from '../../services/sqlite.service';
+import { CardContainerComponent } from '../../card-container-component/card-container-component';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    CardContainerComponent
   ],
   templateUrl: './home-page.html',
   styleUrls: []
