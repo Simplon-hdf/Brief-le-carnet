@@ -8,12 +8,9 @@ import { HomePage } from './pages/home-page/home-page';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet, 
-    HeaderComponent, 
-    FooterComponent, 
-    ContactManagerComponent
-  , HomePage],
+  
+  imports: [RouterOutlet, ContactList, HeaderComponent,FooterComponent,ContactManagerComponent, HomePage],
+
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
