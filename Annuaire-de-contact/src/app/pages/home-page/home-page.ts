@@ -12,7 +12,7 @@ import { SqliteService, User } from '../../services/sqlite.service';
     FormsModule
   ],
   templateUrl: './home-page.html',
-  styleUrls: [] // <--- REMOVE if you have no .scss or .css file! Otherwise, put the correct file.
+  styleUrls: []
 })
 export class HomePage implements OnInit {
   contacts: User[] = [];
@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   isLoading = false;
   currentView: string = 'contacts';
   
-  searchTerm: string = ''; // Add this so [(ngModel)] in your HTML works!
+  searchTerm: string = '';
 
   constructor(
     private contactService: SqliteService,
@@ -43,7 +43,6 @@ export class HomePage implements OnInit {
     }
   }
 
-  // This method is called (input)="onSearch()" in your template
   async onSearch() {
     const term = this.searchTerm.trim().toLowerCase();
     if (!term) {

@@ -1,5 +1,5 @@
 <h2 class="text-2xl font-semibold text-center text-indigo-900 mb-6">Ajouter un contact</h2>
-<form (ngSubmit)="envoie()" #formRef="ngForm" class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-5">
+<form (ngSubmit)="onSubmit()" #formRef="ngForm" class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-5">
 
     <div class="flex space-x-4 justify-center mb-4">
         <label class="block text-sm font-medium text-gray-700 mb-1">
@@ -10,189 +10,136 @@
         </label>
     </div>
 
-            <!-- NOM -->
-
     <div *ngIf="donneForm.type === 'interimaire'">
-        <label class="block text-sm font-medium text-gray-700 mb-1">Nom : </label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nom :</label>
         <input type="text" [(ngModel)]="donneForm.nom" name="nom" required pattern="[a-zA-ZÀ-ÿ\s'-]+" #nom="ngModel"
-        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
-
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
         <div class="text-red-600 text-sm mt-1" *ngIf="nom.invalid && nom.touched">
             <div *ngIf="nom.errors?.['required']">Le nom est requis.</div>
             <div *ngIf="nom.errors?.['pattern']">Le nom doit contenir uniquement des lettres.</div>
         </div>
     </div>
 
-            <!-- PRÉNOM -->
-
     <div *ngIf="donneForm.type === 'interimaire'">
-        <label class="block text-sm font-medium text-gray-700 mb-1">Prénom : </label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Prénom :</label>
         <input type="text" [(ngModel)]="donneForm.prenom" name="prenom" required pattern="[a-zA-ZÀ-ÿ\s'-]+" #prenom="ngModel"
-        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
-
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
         <div class="text-red-600 text-sm mt-1" *ngIf="prenom.invalid && prenom.touched">
             <div *ngIf="prenom.errors?.['required']">Le prénom est requis.</div>
             <div *ngIf="prenom.errors?.['pattern']">Le prénom doit contenir uniquement des lettres</div>
         </div>
     </div>
 
-            <!--NOM DE L ENTREPRISE-->
-
     <div *ngIf="donneForm.type === 'entreprise'">
-        <label class="block text-sm font-medium text-gray-700 mb-1">Nom de l'entreprise : </label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nom de l'entreprise :</label>
         <input type="text" [(ngModel)]="donneForm.nom" name="nom" required pattern="[a-zA-ZÀ-ÿ\s'-]+" #nom="ngModel"
-        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         <div *ngIf="nom.invalid && nom.touched" class="text-red-600 text-sm">
             <div *ngIf="nom.errors?.['required']">Le nom est requis.</div>
             <div *ngIf="nom.errors?.['pattern']">Le nom doit contenir uniquement des lettres.</div>
         </div>
     </div>
 
-                <!-- PHOTO -->
-
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div *ngIf="donneForm.type === 'interimaire'">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Photo de profil : </label>
-            <input type="file" id="picturesUpload" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
-            class="hidden w-full border rounded-lg px-4 py-2 text-gray-500"/>
-
+            <label class="block text-sm font-medium text-gray-700 mb-1">Photo de profil :</label>
+            <input type="file" id="picturesUpload" (change)="onPhotoSelected($event)" accept="image/png,image/jpg" name="photo" required #photoInput
+                class="hidden w-full border rounded-lg px-4 py-2 text-gray-500"/>
             <label for="picturesUpload" class="inline-block cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">Choisir un fichier</label>
-
             <p class="text-sm mt-2 text-gray-600" *ngIf="photoInput && photoInput.files?.length">Fichier sélectionné : {{ photoInput?.files?.[0]?.name }}</p>
-
-            <figure *ngIf="photoPrevieuw">
-                <img [src]="photoPrevieuw" alt="Apercu photo">
+            <figure *ngIf="photoPreview">
+                <img [src]="photoPreview" alt="Apercu photo">
             </figure>
-
             <div *ngIf="!photoInput.value && formRef.submitted" class="text-red-600 text-sm mt-1">Une photo de profil est requise.</div>
         </div>
-
-                <!-- LOGO ENTREPRISE  -->
-
         <div *ngIf="donneForm.type === 'entreprise'">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Logo de l'entreprise : </label>
-            <input type="file" id="logoUpload" (change)="pictures($event)" accept="image/png,image/jpg" name="photo" required #photoInput
-            class="hidden w-full border rounded-lg px-4 py-2 text-gray-500"/>
-            
+            <label class="block text-sm font-medium text-gray-700 mb-1">Logo de l'entreprise :</label>
+            <input type="file" id="logoUpload" (change)="onPhotoSelected($event)" accept="image/png,image/jpg" name="photo" required #photoInput
+                class="hidden w-full border rounded-lg px-4 py-2 text-gray-500"/>
             <label for="logoUpload" class="inline-block cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">Choisir un fichier</label>
-
             <p class="text-sm mt-2 text-gray-600" *ngIf="photoInput && photoInput.files?.length">Fichier sélectionné : {{ photoInput?.files?.[0]?.name }}</p>
-
-            <figure *ngIf="photoPrevieuw">
-                <img [src]="photoPrevieuw" alt="Apercu logo" />
+            <figure *ngIf="photoPreview">
+                <img [src]="photoPreview" alt="Apercu logo" />
             </figure>
             <div *ngIf="!photoInput.value && formRef.submitted" class="text-red-600 text-sm">Un logo est requis.</div>
         </div>
-
-                <!-- ÂGE -->
-
         <div *ngIf="donneForm.type === 'interimaire'">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Âge : </label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Âge :</label>
             <input type="number" [(ngModel)]="donneForm.age" name="age" required min="18" max="120" #age="ngModel"
-            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
-
+                class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
             <div class="text-red-600 text-sm mt-1" *ngIf="age.invalid && age.touched">
                 <div *ngIf="age.errors?.['required']">L'âge est requis.</div>
-                <div *ngIf="age.errors?.['min']">L'âge doit être au moins de 18ans.</div>
+                <div *ngIf="age.errors?.['min']">L'âge doit être au moins de 18 ans.</div>
                 <div *ngIf="age.errors?.['max']">L'âge doit être inférieur à 120 ans.</div>
             </div>
         </div>
     </div>
 
-                <!-- TÉLÉPHONE -->
-
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Numéro de téléphone : </label>
-            <input type="tel" [(ngModel)]="donneForm.telephone" name="telephone" required pattern="^(\d{10})$" maxlength="10" #tel="ngModel"
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Numéro de téléphone :</label>
+        <input type="tel" [(ngModel)]="donneForm.telephone" name="telephone" required pattern="^(\d{10})$" maxlength="10" #tel="ngModel"
             class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
-            <small class="text-gray-500">Format: 10 chiffres (ex: 0123456789)</small>
-
-            <div class="text-red-600 text-sm mt-1" *ngIf="tel.invalid && tel.touched">
-                <div *ngIf="tel.errors?.['required']">Un numéro de téléphone valide est requis.</div>
-                <div *ngIf="tel.errors?.['pattern']">Le numéro de téléphone ne doit contenir que des chiffres.</div>
-                <div *ngIf="tel.errors?.['maxlenght']">Le numéro de téléphone ne doit faire que 10 chiffres maximum.</div>
-            </div>
+        <small class="text-gray-500">Format: 10 chiffres (ex: 0123456789)</small>
+        <div class="text-red-600 text-sm mt-1" *ngIf="tel.invalid && tel.touched">
+            <div *ngIf="tel.errors?.['required']">Un numéro de téléphone valide est requis.</div>
+            <div *ngIf="tel.errors?.['pattern']">Le numéro de téléphone ne doit contenir que des chiffres.</div>
+            <div *ngIf="tel.errors?.['maxlength']">Le numéro de téléphone ne doit faire que 10 chiffres maximum.</div>
         </div>
-
-    <!-- EMAIL -->
+    </div>
 
     <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Email : </label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Email :</label>
         <input type="email" [(ngModel)]="donneForm.email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #email="ngModel"
-        class="w-full border rounded-lg px-4 py-2" />
-
+            class="w-full border rounded-lg px-4 py-2"/>
         <div *ngIf="email.invalid && email.touched" class="text-red-600 text-sm">
             <div *ngIf="email.errors?.['required']">L'email est requis.</div>
             <div *ngIf="email.errors?.['pattern']">Adresse email invalide.</div>
         </div>
     </div>
 
-            <!-- Adresse + Code postal groupés en 2 colonnes -->
-
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-            <!-- ADRESSE POSTALE -->
-
-    <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Adresse postale :</label>
-        <input type="text" [(ngModel)]="donneForm.adressePostal" name="adressePostal" required pattern="^(\d{1,5})(?:\s+(bis|ter|quater))?\s+([A-Za-zÀ-ÿ'’-. ]+)$" #adressePostale="ngModel"
-            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Adresse postale :</label>
+            <input type="text" [(ngModel)]="donneForm.adressePostal" name="adressePostal" required pattern="^(\d{1,5})(?:\s+(bis|ter|quater))?\s+([A-Za-zÀ-ÿ'’-. ]+)$" #adressePostale="ngModel"
+                class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
             <small class="text-gray-500 text-sm">Exemple : 15 rue Victor Hugo</small>
-
-        <div *ngIf="adressePostale.invalid && adressePostale.touched" class="text-red-600 text-sm mt-1">
-        <div *ngIf="adressePostale.errors?.['required']">Une adresse postale est requise.</div>
-        <div *ngIf="adressePostale.errors?.['pattern']">Veuillez saisir une adresse postale complète (ex. : 15 rue Victor Hugo)
+            <div *ngIf="adressePostale.invalid && adressePostale.touched" class="text-red-600 text-sm mt-1">
+                <div *ngIf="adressePostale.errors?.['required']">Une adresse postale est requise.</div>
+                <div *ngIf="adressePostale.errors?.['pattern']">Veuillez saisir une adresse postale complète (ex. : 15 rue Victor Hugo)</div>
+            </div>
         </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Code postal :</label>
+            <input type="number" [(ngModel)]="donneForm.codePostal" name="codePostal" required pattern="^(\d{5})$" #codePostale="ngModel"
+                class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+            <div *ngIf="codePostale.invalid && codePostale.touched" class="text-red-600 text-sm mt-1">
+                <div *ngIf="codePostale.errors?.['required']">Un code postal est requis.</div>
+                <div *ngIf="codePostale.errors?.['pattern']">Veuillez saisir un code postal à 5 chiffres (ex. : 75001)</div>
+            </div>
         </div>
     </div>
-
-            <!-- CODE POSTAL -->
 
     <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Code postal :</label>
-        <input type="number" [(ngModel)]="donneForm.codePostal" name="codePostal" required pattern="^(\d{5})$" #codePostale="ngModel"
-            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
-
-        <div *ngIf="codePostale.invalid && codePostale.touched" class="text-red-600 text-sm mt-1">
-        <div *ngIf="codePostale.errors?.['required']">Un code postal est requis.</div>
-        <div *ngIf="codePostale.errors?.['pattern']">Veuillez saisir un code postal à 5 chiffres (ex. : 75001)
-        </div>
-        </div>
-    </div>
-
-    </div>
-
-            <!-- MÉTIER -->
-
-    <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">{{ donneForm.type === 'entreprise' ? 'Description du poste :' : 'Métier :'  }} </label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">{{ donneForm.type === 'entreprise' ? 'Description du poste :' : 'Métier :' }}</label>
         <input type="text" [(ngModel)]="donneForm.metier" name="metier" required pattern="^([A-Za-zÀ-ÿ0-9 ,.’’-/()]{2,50})$" #metier="ngModel"
-        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
-
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
         <div class="text-red-600 text-sm mt-1" *ngIf="metier.invalid && metier.touched">
             <div *ngIf="metier.errors?.['required']">Veuillez renseigner votre métier.</div>
             <div *ngIf="metier.errors?.['pattern']">Veuillez saisir un intitulé de métier valide (ex. : Développeur web, Infirmier, Boulanger).</div>
         </div>
     </div>
 
-            <!-- DESCRIPTION -->
-
     <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1"> {{ donneForm.type === 'entreprise' ? "Description de l'entreprise : " : 'Description' }} </label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">{{ donneForm.type === 'entreprise' ? "Description de l'entreprise :" : 'Description' }}</label>
         <textarea [(ngModel)]="donneForm.description" name="description" required pattern="^(?:\S+(?:\s+\S+){0,299})?$" minlength="100" #description="ngModel"
-        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
         <small class="text-gray-500">300 mots max (~2000 caractères)</small>
-
         <div *ngIf="description.invalid && description.touched">
             <div *ngIf="description.errors?.['required']">Veuillez renseigner une description.</div>
             <div *ngIf="description.errors?.['minlength']">La description doit contenir au moins 100 caractères.</div>
             <div *ngIf="description.errors?.['pattern']">Votre description est trop longue (maximum 300 mots autorisés).</div>
         </div>
-
-            <!-- SUBMIT -->
-
     </div>
-    <button type="submit" [disabled]="!formRef.valid" 
-    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">Soumettre</button>
+    <button type="submit" [disabled]="!formRef.valid"
+        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">Soumettre</button>
 </form>

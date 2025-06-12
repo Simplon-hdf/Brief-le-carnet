@@ -1,26 +1,21 @@
-
 <div class="flex justify-center gap-6 mb-10">
-
-    <button  class="px-6 py-3 bg-amber-600 text-black font-semibold rounded-lg shadow hover:bg-neutral-300 transition"
+  <button class="px-6 py-3 bg-amber-600 text-black font-semibold rounded-lg shadow hover:bg-neutral-300 transition"
     (click)="filtrer('tous')">Tous</button>
-
-    <button  class="px-6 py-3 bg-blue-200 text-black font-semibold rounded-lg shadow hover:bg-neutral-300 transition"
+  <button class="px-6 py-3 bg-blue-200 text-black font-semibold rounded-lg shadow hover:bg-neutral-300 transition"
     (click)="filtrer('entreprise')">Entreprise</button>
-
-    <button  class="px-6 py-3 bg-yellow-200 text-black font-semibold rounded-lg shadow hover:bg-neutral-300 transition"
+  <button class="px-6 py-3 bg-yellow-200 text-black font-semibold rounded-lg shadow hover:bg-neutral-300 transition"
     (click)="filtrer('interimaire')">Intérimaire</button>
-
 </div>
 
-    <div *ngIf="filtre === 'tous'" class="flex justify-center gap-12 flex-wrap">
-        <app-card-entreprise-component></app-card-entreprise-component>
-        <app-card-interimaire-component></app-card-interimaire-component>
-    </div>
-
-    <div *ngIf="filtre === 'entreprise'" class="flex justify-center">
-        <app-card-entreprise-component></app-card-entreprise-component>
-    </div>
-
-    <div *ngIf="filtre === 'interimaire'" class="flex justify-center">
-        <app-card-interimaire-component></app-card-interimaire-component>
-    </div>
+<div class="flex justify-center gap-12 flex-wrap">
+  <ng-container *ngFor="let item of getFiltered()">
+    <app-card-entreprise-component
+      *ngIf="item.type === 'entreprise'"
+      [data]="item">
+    </app-card-entreprise-component>
+    <app-card-interimaire-component
+      *ngIf="item.type === 'interimaire'"
+      [data]="item">
+    </app-card-interimaire-component>
+  </ng-container>
+</div>
