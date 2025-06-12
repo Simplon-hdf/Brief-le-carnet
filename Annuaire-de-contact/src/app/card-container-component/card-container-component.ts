@@ -1,44 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardEntrepriseComponent } from '../card-entreprise-component/card-entreprise-component';
 import { CardInterimaireComponent } from '../card-interimaire-component/card-interimaire-component';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-card-container',
   standalone: true,
-  imports: [CardEntrepriseComponent, CardInterimaireComponent],
+  imports: [CardEntrepriseComponent, CardInterimaireComponent, CommonModule],
   templateUrl: './card-container-component.html'
 })
-export class CardContainerComponent {
-  donnees = [
-    {
-      type: 'interimaire',
-      nom: 'Alice',
-      prenom: 'Dupont',
-      photo: null,
-      age: 27,
-      telephone: '0606060606',
-      email: 'alice@email.fr',
-      adressePostal: '11 rue de Paris',
-      codePostal: '75001',
-      metier: 'Serveuse',
-      description: 'Expérience en restauration rapide.',
-    },
-    {
-      type: 'entreprise',
-      nom: 'EntrepriseX',
-      photo: null,
-      email: 'contact@entreprisex.fr',
-      telephone: '0155555555',
-      adressePostal: '9 avenue Victor Hugo',
-      codePostal: '75016',
-      metier: 'Chef de Projet',
-      description: 'Nous recrutons dans la tech.',
-      descriptionPoste: 'CDI, équipe dynamique.',
-    }
-  ];
-
+export class CardContainerComponent implements OnInit {
+  donnees: any[] = [];
   filtre: 'tous' | 'entreprise' | 'interimaire' = 'tous';
+
+  ngOnInit() {
+    const data = localStorage.getItem('contacts');
+    if (data) {
+      this.donnees = JSON.parse(data);
+    }
+  }
 
   filtrer(type: 'tous' | 'entreprise' | 'interimaire') {
     this.filtre = type;

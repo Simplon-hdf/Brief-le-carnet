@@ -1,29 +1,39 @@
+import { Component, OnInit } from '@angular/core';
+import { SqliteService, User } from '../services/sqlite.service';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { SearchBar } from "../search-bar/search-bar";
 
 @Component({
   selector: 'app-contact-list',
-  imports: [CommonModule, SearchBar],
   templateUrl: './contact-list.html',
-  styleUrl: './contact-list.css'
+  styleUrl: './contact-list.css',
+  standalone: true,
+  imports: [CommonModule]
 })
-export class ContactList {
-  contacts = [
-    { name: 'Loïc', email: 'loïc@machin.com', num: '07 56 98 45 25' },
-    { name: 'Cédric', email: 'cédric@truc.com', num: '06 59 48 52 63' },
-    { name: 'Amine', email: 'amine@cirque.com', num: '06 98 85 45 69' },
-    { name: 'Bob', email: 'bob@foudubus.com', num: '07 97 28 96 78' },
-    { name: 'Xavier', email: 'xavier@foudelagare.com', num: '06 65 45 12 36' },
-  ];
-  filteredContacts = [...this.contacts];
+export class ContactList implements OnInit {
+  contacts: User[] = [];
+  filteredContacts: User[] = [];
   searchTerm: string = '';
-  filterContacts(term: string) {
-    this.searchTerm = term;
-  const normalizedTerm = term.toLowerCase().trim();
-  this.filteredContacts = this.contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedTerm) || contact.email.toLowerCase().includes(normalizedTerm) || contact.num.includes(normalizedTerm)
-  );
-}
-}
+  loading: boolean = false;
 
+  constructor(private sqliteService: SqliteService) {}
+
+  ngOnInit(): void {
+    this.loadContacts();
+  }
+
+  async loadContacts() {
+    this.loading = true;
+    this.contacts = await this.sqliteService.getAllContacts();
+    this.filteredContacts = this.contacts;
+    this.loading = false;
+  }
+
+  async filterContacts(term: string) {
+    this.searchTerm = term;
+    if (!term.trim()) {
+      this.filteredContacts = this.contacts;
+    } else {
+      this.filteredContacts = await this.sqliteService.searchContacts(term);
+    }
+  }
+}
