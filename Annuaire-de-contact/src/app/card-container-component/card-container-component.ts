@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CardEntrepriseComponent } from '../card-entreprise-component/card-entreprise-component';
 import { CardInterimaireComponent } from '../card-interimaire-component/card-interimaire-component';
 import { CommonModule } from '@angular/common';
+import { SqliteService, User } from '../services/sqlite.service';
 
 @Component({
   selector: 'app-card-container',
@@ -10,14 +11,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './card-container-component.html'
 })
 export class CardContainerComponent implements OnInit {
-  donnees: any[] = [];
+  donnees: User[] = [];
   filtre: 'tous' | 'entreprise' | 'interimaire' = 'tous';
+  loading = true;
 
-  ngOnInit() {
-    const data = localStorage.getItem('contacts');
-    if (data) {
-      this.donnees = JSON.parse(data);
-    }
+  constructor(private sqliteService: SqliteService) {}
+
+  async ngOnInit() {
+    this.donnees = await this.sqliteService.getAllContacts();
+    this.loading = false;
   }
 
   filtrer(type: 'tous' | 'entreprise' | 'interimaire') {

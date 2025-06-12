@@ -34,6 +34,9 @@ export class SqliteService {
     if (savedDb) {
       const uint8Array = new Uint8Array(atob(savedDb).split('').map(c => c.charCodeAt(0)));
       this.db = new this.SQL.Database(uint8Array);
+      try {
+        this.db.run('ALTER TABLE contacts ADD COLUMN type TEXT');
+      } catch (err) {}
     } else {
       this.db = new this.SQL.Database();
       this.createTables();

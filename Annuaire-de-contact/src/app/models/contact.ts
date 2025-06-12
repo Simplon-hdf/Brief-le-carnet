@@ -1,7 +1,15 @@
-export interface Contact {
+export interface contacts {
   id?: number;
-  name: string;
+  type?: 'entreprise' | 'interimaire';
+  nom: string;
+  prenom?: string;
+  photo?: string;
+  age?: number;
+  telephone?: string;
   email: string;
-  phone?: string;
-  createdAt?: Date;
+  adressePostal?: string;
+  codePostal?: string;
+  metier?: string;
+  description?: string;
+  createdAt?: string;
 }

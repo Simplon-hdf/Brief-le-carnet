@@ -21,7 +21,6 @@ export class HomePage implements OnInit {
   displayedContacts: User[] = [];
   isLoading = false;
   currentView: string = 'contacts';
-  
   searchTerm: string = '';
 
   constructor(
@@ -52,9 +51,9 @@ export class HomePage implements OnInit {
       return;
     }
     this.displayedContacts = this.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(term) ||
+      contact.nom.toLowerCase().includes(term) ||
       contact.email.toLowerCase().includes(term) ||
-      (contact.phone && contact.phone.includes(term))
+      (contact.telephone && contact.telephone.includes(term))
     );
   }
 

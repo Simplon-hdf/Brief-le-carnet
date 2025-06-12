@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SqliteService, User } from '../sqlite.service';
+import { SqliteService, User } from '../services/sqlite.service';
 
 @Component({
   selector: 'app-user-form-component',
