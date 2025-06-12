@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SqliteService, User } from '../services/sqlite.service';
-import { ContactList } from '../contact-list/contact-list';
 
 @Component({
   selector: 'app-contact-manager',
   standalone: true,
-  imports: [FormsModule, CommonModule, ContactList],
+  imports: [FormsModule, CommonModule],
   templateUrl: './contact-manager.html',
   styleUrls: []
 })
+
 export class ContactManagerComponent implements OnInit {
   contacts: User[] = [];
   displayedContacts: User[] = [];
