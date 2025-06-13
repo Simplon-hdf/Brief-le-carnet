@@ -120,7 +120,7 @@
     </div>
 
     <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">{{ donneForm.type === 'entreprise' ? 'Description du poste :' : 'Métier :' }}</label>
+        <label class="block text-sm font-medium text-gray-700 mb-1">{{ donneForm.type === 'entreprise' ? 'Poste recherché :' : 'Métier :' }}</label>
         <input type="text" [(ngModel)]="donneForm.metier" name="metier" required pattern="^([A-Za-zÀ-ÿ0-9 ,.’’-/()]{2,50})$" #metier="ngModel"
             class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
         <div class="text-red-600 text-sm mt-1" *ngIf="metier.invalid && metier.touched">
@@ -139,7 +139,21 @@
             <div *ngIf="description.errors?.['minlength']">La description doit contenir au moins 100 caractères.</div>
             <div *ngIf="description.errors?.['pattern']">Votre description est trop longue (maximum 300 mots autorisés).</div>
         </div>
+        
     </div>
+
+    <div *ngIf="donneForm.type === 'entreprise'">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Description du poste :</label>
+        <textarea [(ngModel)]="donneForm.posteRecherche" name="posteRecherche" required pattern="^(?:\S+(?:\s+\S+){0,299})?$" minlength="100" #posteRecherche="ngModel"
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+        <small class="text-gray-500">300 mots max (~2000 caractères)</small>
+        <div *ngIf="posteRecherche.invalid && posteRecherche.touched">
+            <div *ngIf="description.errors?.['required']">Veuillez renseigner une description.</div>
+            <div *ngIf="description.errors?.['minlength']">La description doit contenir au moins 100 caractères.</div>
+            <div *ngIf="description.errors?.['pattern']">Votre description est trop longue (maximum 300 mots autorisés).</div>
+        </div>
+    </div>
+
     <button type="submit" [disabled]="!formRef.valid"
         class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">Soumettre</button>
 </form>

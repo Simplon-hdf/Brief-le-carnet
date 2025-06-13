@@ -15,12 +15,12 @@
         <p><strong>Téléphone :</strong> {{ data.telephone }}</p>
         <p><strong>Adresse :</strong> {{ data.adressePostal }} ({{ data.codePostal }})</p>
         <p><strong>Poste recherché :</strong> {{ data.metier }}</p>
-        <p><strong>Description entreprise :</strong> {{ data.description }}</p>
+        <p class="text-sm line-clamp-2" [class.line-clamp-2]="!isExpanded"><strong>Description entreprise :</strong><br> {{ data.description }}</p>
     </div>
 
     <div [hidden]="!isExpanded" class="mt-3 text-sm text-gray-900">
         <p class="font-semibold mb-1">Description du poste :</p>
-        <p>{{ data.descriptionPoste }}</p>
+        <p>{{ data.posteRecherche }}</p>
     </div>
 
     <div class="mt-4">
