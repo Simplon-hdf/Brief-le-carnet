@@ -11,5 +11,6 @@ export interface contacts {
   codePostal?: string;
   metier?: string;
   description?: string;
+  posteRecherche?: string;
   createdAt?: string;
 }

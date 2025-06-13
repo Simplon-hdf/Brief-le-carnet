@@ -14,6 +14,7 @@ export interface User {
   codePostal: string;
   metier: string;
   description: string;
+  posteRecherche?: string;
   createdAt?: string;
 }
 
@@ -35,7 +36,7 @@ export class SqliteService {
       const uint8Array = new Uint8Array(atob(savedDb).split('').map(c => c.charCodeAt(0)));
       this.db = new this.SQL.Database(uint8Array);
       try {
-        this.db.run('ALTER TABLE contacts ADD COLUMN type TEXT');
+        this.db.run('ALTER TABLE contacts ADD COLUMN posteRecherche TEXT');
       } catch (err) {}
     } else {
       this.db = new this.SQL.Database();
@@ -60,6 +61,7 @@ export class SqliteService {
         codePostal TEXT,
         metier TEXT,
         description TEXT,
+        posteRecherche TEXT,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `;
@@ -94,6 +96,7 @@ export class SqliteService {
         codePostal: row['codePostal'] as string,
         metier: row['metier'] as string,
         description: row['description'] as string,
+        posteRecherche: row['posteRecherche'] as string,
         createdAt: row['createdAt'] as string
       });
     }
@@ -121,6 +124,7 @@ export class SqliteService {
         codePostal: row['codePostal'] as string,
         metier: row['metier'] as string,
         description: row['description'] as string,
+        posteRecherche: row['posteRecherche'] as string,
         createdAt: row['createdAt'] as string
       };
       stmt.free();
@@ -136,9 +140,11 @@ export class SqliteService {
     const stmt = this.db.prepare(`
       INSERT INTO contacts (
         type, nom, prenom, photo, age, telephone, email, 
-        adressePostal, codePostal, metier, description
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        adressePostal, codePostal, metier, description, posteRecherche
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      
     `);
+    const posteRechercheValue = contact.posteRecherche ?? '';
     stmt.run([
       contact.type,
       contact.nom,
@@ -150,7 +156,8 @@ export class SqliteService {
       contact.adressePostal,
       contact.codePostal,
       contact.metier,
-      contact.description
+      contact.description,
+      posteRechercheValue,
     ]);
     const lastId = this.db.exec("SELECT last_insert_rowid() as id")[0].values[0][0] as number;
     stmt.free();
@@ -167,9 +174,10 @@ export class SqliteService {
     const stmt = this.db.prepare(`
       UPDATE contacts SET
         type=?, nom=?, prenom=?, photo=?, age=?, telephone=?, email=?, 
-        adressePostal=?, codePostal=?, metier=?, description=?
+        adressePostal=?, codePostal=?, metier=?, description=?, posteRecherche=?
       WHERE id=?
     `);
+    const posteRechercheValue = contact.posteRecherche ?? '';
     stmt.run([
       contact.type,
       contact.nom,
@@ -182,6 +190,7 @@ export class SqliteService {
       contact.codePostal,
       contact.metier,
       contact.description,
+      posteRechercheValue,
       id
     ]);
     stmt.free();
@@ -223,6 +232,7 @@ export class SqliteService {
         codePostal: row['codePostal'] as string,
         metier: row['metier'] as string,
         description: row['description'] as string,
+        posteRecherche: row['posteRecherche'] as string,
         createdAt: row['createdAt'] as string
       });
     }
