@@ -23,6 +23,7 @@ export class UserFormComponent {
     codePostal: '',
     metier: '',
     description: '',
+    posteRecherche: '',
   };
 
   photoPreview: string | ArrayBuffer | null = null;
@@ -84,6 +85,7 @@ export class UserFormComponent {
       codePostal: '',
       metier: '',
       description: '',
+      posteRecherche: '',
     };
     this.photoPreview = null;
   }
